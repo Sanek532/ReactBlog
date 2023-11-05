@@ -1,49 +1,62 @@
 require('./bootstrap');
 import React from 'react';
 import Header from "./components/header";
-import Image from "./components/image";
-import logoReact from "../image/react.jpg" //для вывода картинок в js их всегда нужно импортировать вот так
+import Users from "./components/users";
+import AddUser from "./components/addUser";
+import axios from "axios"
+
+const baseUrl = "https://reqres.in/api/users?page=1/"
 
 class App extends React.Component {
     constructor(props) {
         super(props);
+        axios.get(baseUrl).then((res) => {
+            this.setState({ users: res.data.data})
+            console.log(res.data.data);
+        })
         this.state = {
-            text: "Тест",
-            userText: null,
-        }
+            users: []
+        };
 
-        this.onClick = this.onClick.bind(this);
-        this.mouseOver = this.mouseOver.bind(this);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (document.title !== "Laravel") {
-            document.title = "Laravel";
-            console.log("Заголовок страница изменен");
-        }
+        this.addUser = this.addUser.bind(this);
+        this.deleteUser = this.deleteUser.bind(this);
+        this.editUser = this.editUser.bind(this);
     }
 
     render() {
         return (
-            <div className="name">
-                <Header myTitle="Шапка моего сайта" myText={"fdf" + (5+9)} />
-                <h1>{this.state.text}</h1>
-                <h2>{this.state.userText}</h2>
-                <input placeholder="Поле для ввода текста" onChange={event => this.setState({userText: event.target.value})} onClick={this.onClick} onMouseEnter={this.mouseOver}/>
-                <p>w123</p>
-                <Image image={logoReact}/>
+            <div>
+                <Header myTitle="Список пользователей" />
+                <main>
+                    <Users users={this.state.users} onDelete={this.deleteUser} onEdit={this.editUser}/>
+                </main>
+                <aside>
+                    <AddUser onSaveUser={this.addUser}/>
+                </aside>
             </div>
         );
     }
 
-    onClick() {
-        this.setState({text: "Нажал"});
-        console.log("Click");
+    addUser(user) {
+        const id = this.state.users.length + 1;
+        this.setState({ users: [...this.state.users, {id, ...user}]})
+        console.log(this.state.users);
     }
 
-    mouseOver() {
-        this.setState({text: "Навел"});
-        console.log("Навел");
+    editUser(user) {
+        let allUsers = this.state.users;
+        allUsers[user.id - 1] = user;
+
+        this.setState({ users: [] }, () => {
+            this.setState({ users: allUsers});
+        });
+        console.log(user);
+    }
+
+    deleteUser(id) {
+        this.setState({
+                users: this.state.users.filter((user) => user.id !== id)
+            })
     }
 }
 
