@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,500&family=Work+Sans:ital@1&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #a0aec0;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+}
+
+main {
+    margin: 50px 100px;
+    width: 50%;
+    float: left;
+}
+
+main .user {
+    margin-bottom: 50px;
+    background-color: #9cea28;
+    padding: 20px;
+}
+
+main .delete-icon {
+    float: right;
+    color: red;
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+main .edit-icon {
+    margin-right: 25px;
+    float: right;
+    color: blue;
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+main .edit-icon:hover,
+main .delete-icon:hover {
+    opacity: 0.5;
+}
+
+aside {
+    width: 20%;
+    margin-top: 50px;
+    margin-left: 5%;
+    float: left;
+}
+
+aside form input:not([type="checkbox"]), aside form textarea, aside form  button {
+    width: 90%;
+    padding: 15px 5%;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+    border: 0;
+    background: #222;
+    color: white;
+    outline-offset: 5px;
+}
+
+aside form input[type="checkbox"] {
+    margin: 10px;
+}
+aside form button {
+    width: 100%;
+    cursor: pointer;
+    transition: transform 500ms ease;
+}
+
+aside form button:hover {
+    transform: scale(1.1);
+}
+
+.user form {
+    margin-top: 20px;
+}
+
+.user form input:not([type="checkbox"]), .user form textarea, .user form  button {
+    width: 90%;
+    padding: 15px 5%;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+    border: 0;
+    background: #1b3057;
+    color: white;
+    outline-offset: 2px;
+}
+
+.user form input[type="checkbox"] {
+    margin: 10px;
+}
+.user form button {
+    width: 100%;
+    cursor: pointer;
+    transition: transform 500ms ease;
+}
+
+.user form button:hover {
+    transform: scale(1.05);
+}
+
+.header {
+    background-color: brown;
+    padding: 20px 100px;
+    font-weight: 500;
+}
